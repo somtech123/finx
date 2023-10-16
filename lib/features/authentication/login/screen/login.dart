@@ -5,6 +5,7 @@ import 'package:finx/features/authentication/login/controller/login_controller.d
 import 'package:finx/features/authentication/reset/screen/reset_password.dart';
 import 'package:finx/features/authentication/signup/screen/signup.dart';
 import 'package:finx/features/authentication/signup/widget/social_widget.dart';
+import 'package:finx/features/bottom_tab/screen/bottom_tab.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -108,7 +109,9 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h),
                 PrimaryButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAll(() => BottomTab());
+                  },
                   label: 'Sign in',
                 ),
                 SizedBox(height: 20.h),

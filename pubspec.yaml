@@ -47,6 +47,7 @@ dependencies:
   csc_picker: ^0.2.7
   
   intl_phone_field: ^3.1.0
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/svgs/ 
+    - assets/svgs/stamp.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

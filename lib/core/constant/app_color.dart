@@ -17,4 +17,6 @@ class AppColor {
   static const Color greyColor = Colors.grey;
 
   static const Color secondaryLight = Color(0xFFE5EBF0);
+
+  static const Color tranColor = Color(0xFFFFFCFC);
 }
