@@ -1,6 +1,9 @@
 import 'package:finx/core/constant/app_color.dart';
+import 'package:finx/features/payment/screen/airtime_screen.dart';
+import 'package:finx/features/payment/widget/payment_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -22,18 +25,80 @@ class PaymentScreen extends StatelessWidget {
               ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.h),
-        child: Column(
-          children: [
-            Text(
-              'Recent payments',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Recent payments',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              Text(
+                'Send Money',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'To FinX',
+                leading: SvgPicture.asset('assets/svgs/circular_finx_logo.svg'),
+                ontap: () {},
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Other Bank',
+                leading: SvgPicture.asset('assets/svgs/bank_icon.svg'),
+                ontap: () {},
+              ),
+              SizedBox(height: 30.h),
+              Text(
+                'Pay Bills',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Airtime',
+                leading: SvgPicture.asset('assets/svgs/call.svg'),
+                ontap: () {
+                  Get.to(() => AirtimeScreen());
+                },
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Cable Tv',
+                leading: SvgPicture.asset('assets/svgs/cable_icon.svg'),
+                ontap: () {},
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Electricity',
+                leading: SvgPicture.asset('assets/svgs/electricity_icon.svg'),
+                ontap: () {},
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Internet',
+                leading: SvgPicture.asset('assets/svgs/electricity.svg'),
+                ontap: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

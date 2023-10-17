@@ -8,6 +8,7 @@ import '../utlis/responsive_ui.dart';
 class AppTextField extends StatelessWidget {
   final String? hintText;
   final TextStyle? textStyle;
+  final TextStyle? hintStyle;
   final InputDecoration? inputDecoration;
   final void Function(String)? onChanged;
 
@@ -63,6 +64,7 @@ class AppTextField extends StatelessWidget {
       this.enabled = true,
       this.inputFormatters,
       this.maxLines,
+      this.hintStyle,
       this.helperText,
       this.enableInteractiveSelection = true,
       this.obscureText = false,
@@ -104,11 +106,13 @@ class AppTextField extends StatelessWidget {
             counterText: "",
             errorStyle: TextStyle(fontSize: sh(12)),
             contentPadding: EdgeInsets.fromLTRB(sw(12), sh(20), sw(12), sh(20)),
-            hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color:
-                    Get.isDarkMode ? AppColor.whiteColor : AppColor.greyColor),
+            hintStyle: hintStyle ??
+                Theme.of(context).textTheme.bodyText1!.copyWith(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: Get.isDarkMode
+                        ? AppColor.whiteColor
+                        : AppColor.greyColor),
             border: OutlineInputBorder(
                 borderSide: BorderSide(
                     color:

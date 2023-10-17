@@ -48,6 +48,7 @@ dependencies:
   
   intl_phone_field: ^3.1.0
   persistent_bottom_nav_bar: ^5.0.2
+  pin_plus_keyboard: ^2.0.6
 
 dev_dependencies:
   flutter_test:
