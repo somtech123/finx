@@ -20,4 +20,8 @@ class AppColor {
 
   static const Color tranColor = Color(0xFFFFFCFC);
   static const Color errorColor = Color(0xFFFF0000);
+  static const Color offBlue = Color(0xFFA9B0D6);
+
+  static const Color underLineColor = Color(0xFFC7CBDF);
+  static const Color grey = Color(0xFFE5EBF0);
 }

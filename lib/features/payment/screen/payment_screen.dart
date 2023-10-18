@@ -1,6 +1,7 @@
 import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/features/payment/screen/airtime_screen.dart';
 import 'package:finx/features/payment/screen/send_money_screen.dart';
+import 'package:finx/features/payment/screen/transfer_finx.dart';
 import 'package:finx/features/payment/widget/payment_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +53,7 @@ class PaymentScreen extends StatelessWidget {
                 text: 'To FinX',
                 leading: SvgPicture.asset('assets/svgs/circular_finx_logo.svg'),
                 ontap: () {
-                  Get.to(() => SendMoneyScreen());
+                  Get.to(() => TransferFinXScreen());
                 },
               ),
               SizedBox(height: 20.h),
@@ -60,7 +61,9 @@ class PaymentScreen extends StatelessWidget {
                 context,
                 text: 'Other Bank',
                 leading: SvgPicture.asset('assets/svgs/bank_icon.svg'),
-                ontap: () {},
+                ontap: () {
+                  Get.to(() => SendMoneyScreen());
+                },
               ),
               SizedBox(height: 30.h),
               Text(

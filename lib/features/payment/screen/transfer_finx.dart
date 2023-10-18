@@ -3,13 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_color.dart';
-import '../../../core/shared_widgets/app_drop_down.dart';
 import '../../../core/shared_widgets/app_text_field.dart';
 import '../../../core/shared_widgets/primary_button.dart';
 import 'make_payment_screen.dart';
 
-class SendMoneyScreen extends StatelessWidget {
-  const SendMoneyScreen({super.key});
+class TransferFinXScreen extends StatelessWidget {
+  const TransferFinXScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +34,6 @@ class SendMoneyScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomDropDownForm(
-                onChanged: (p0) {},
-                header: 'bank',
-                listOfValue: const ['Uba', 'Sterling', 'First bank'],
-                selectedValue: 'Uba',
-              ),
               Text(
                 'Account Number',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(

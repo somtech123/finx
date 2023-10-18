@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+import '../constant/app_color.dart';
 
 class CustomDropDownForm extends StatelessWidget {
-  CustomDropDownForm({
+  const CustomDropDownForm({
     Key? key,
     required String selectedValue,
     required this.listOfValue,
@@ -30,11 +33,11 @@ class CustomDropDownForm extends StatelessWidget {
           header,
           style: Theme.of(context)
               .textTheme
-              .caption!
-              .copyWith(color: Colors.black, fontWeight: FontWeight.w500),
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.w500),
         ),
         SizedBox(
-          height: 4.h,
+          height: 20.h,
         ),
         DropdownButtonFormField(
           value: _selectedValue,
@@ -56,30 +59,35 @@ class CustomDropDownForm extends StatelessWidget {
               value: val,
               child: Text(
                 val,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             );
           }).toList(),
           decoration: InputDecoration(
+              fillColor: Get.isDarkMode
+                  ? AppColor.secondaryDarkColor
+                  : AppColor.secondaryLight,
+              filled: true,
               constraints: BoxConstraints.expand(height: 56.h),
               contentPadding: EdgeInsets.symmetric(horizontal: 17.w),
               hintText: 'nvv',
-              hintStyle: const TextStyle(
-                  fontSize: 12,
+              hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xffBDBDBD)),
+                  color: Get.isDarkMode
+                      ? AppColor.whiteColor
+                      : AppColor.greyColor),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.r),
                   borderSide:
-                      BorderSide(color: const Color(0xffBDBDBD), width: 1.w)),
+                      BorderSide(color: Colors.transparent, width: 1.w)),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.r),
                   borderSide:
-                      BorderSide(color: const Color(0xffBDBDBD), width: 1.w))),
+                      BorderSide(color: Colors.transparent, width: 1.w))),
         )
       ],
     );
