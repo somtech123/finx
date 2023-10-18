@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'Fx',
+          title: 'Finx',
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.system,
           darkTheme: AppTheme.darkTheme,
