@@ -1,30 +1,9 @@
-import 'package:finx/core/theme/theme.dart';
-import 'package:finx/features/splash/screen/splash_screen.dart';
+import 'package:finx/finx.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: (context, child) {
-        return GetMaterialApp(
-          title: 'Finx',
-          debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.system,
-          darkTheme: AppTheme.darkTheme,
-          theme: AppTheme.lightTheme,
-          smartManagement: SmartManagement.keepFactory,
-          home: SplashScreen(),
-        );
-      },
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const Finx());
 }

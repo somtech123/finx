@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/core/utlis/responsive_ui.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class PhoneTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(PhoneNumber)? onChanged;
 
-  final void Function(PhoneNumber)? validator;
+  final FutureOr<String?> Function(PhoneNumber?)? validator;
 
   final String? errorMessage;
   final TextEditingController? controller;
@@ -89,6 +91,7 @@ class PhoneTextField extends StatelessWidget {
       initialCountryCode: 'NG',
       onChanged: onChanged,
       invalidNumberMessage: 'Invalid phone number',
+      validator: validator,
     );
   }
 }

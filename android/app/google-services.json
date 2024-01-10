@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486545832580",
+    "project_id": "finx-7546a",
+    "storage_bucket": "finx-7546a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486545832580:android:ddc88e4f4a4365f5d1a0d1",
+        "android_client_info": {
+          "package_name": "com.example.finx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqS3TdMf8JHm181vs_tyPO5cg6r7bhl7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

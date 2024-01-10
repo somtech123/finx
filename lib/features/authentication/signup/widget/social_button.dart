@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 Widget socialButton(BuildContext context,
-    {required Widget leading, required String text}) {
+    {required Widget leading,
+    required String text,
+    required VoidCallback ontap}) {
   return Container(
     height: 50.h,
     width: Get.width,
@@ -16,6 +18,7 @@ Widget socialButton(BuildContext context,
     ),
     child: ListTile(
       leading: leading,
+      onTap: ontap,
       title: Text(
         text,
         style: Theme.of(context)

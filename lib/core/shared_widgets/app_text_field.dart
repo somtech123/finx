@@ -51,6 +51,12 @@ class AppTextField extends StatelessWidget {
 
   // final String? helperText;
 
+  final String? Function(String?)? validator;
+  
+  final VoidCallback? ontap;
+  final VoidCallback? onEdittingComplete;
+  final void Function(String)? onFieldSubmitted;
+
   AppTextField(
       {this.hintText,
       this.suffixIcon,
@@ -71,29 +77,38 @@ class AppTextField extends StatelessWidget {
       this.isTransparentBorder = false,
       this.textCapitalization = TextCapitalization.none,
       this.borderColor = Colors.transparent,
+      this.validator,
       // AppColor.greyColor,
       this.textColor,
       // this.helperText,
       this.maxLength = TextField.noMaxLength,
       this.textStyle,
-      this.inputDecoration});
+      this.inputDecoration,
+        this.onFieldSubmitted,
+      this.ontap,
+      
+      this.onEdittingComplete,
+      
+      });
 
   @override
   Widget build(BuildContext context) {
     final sh = sHeight(context);
     final sw = sWidth(context);
 
-    return TextField(
+    return TextFormField(
       inputFormatters: inputFormatters,
       enableInteractiveSelection: enableInteractiveSelection,
       enabled: enabled,
       cursorColor: AppColor.primaryColor,
       textCapitalization: textCapitalization,
       controller: controller,
+      validator: validator,
       focusNode: focusNode,
       obscureText: obscureText,
       maxLines: maxLines ?? 1,
       keyboardType: keyboardType,
+      
       maxLength: maxLength,
       style: textStyle ??
           Theme.of(context).textTheme.headline5!.copyWith(fontSize: sh(13)),
@@ -152,6 +167,12 @@ class AppTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
           ),
       onChanged: onChanged,
+      onTap: ontap,
+      onEditingComplete: onEdittingComplete,
+      onFieldSubmitted: onFieldSubmitted ??
+          (value) {
+            SystemChannels.textInput.invokeMethod('TextInput.hide');
+          },
     );
   }
 }

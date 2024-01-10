@@ -5,7 +5,6 @@ import 'package:finx/features/authentication/login/controller/login_controller.d
 import 'package:finx/features/authentication/reset/screen/reset_password.dart';
 import 'package:finx/features/authentication/signup/screen/signup.dart';
 import 'package:finx/features/authentication/signup/widget/social_widget.dart';
-import 'package:finx/features/bottom_tab/screen/bottom_tab.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,6 +46,9 @@ class LoginScreen extends StatelessWidget {
                 AppTextField(
                   hintText: 'Email',
                   prefixIcon: const Icon(Icons.email),
+                  onChanged: (p0) => ctr.clearError(ctr.emailErrorText),
+                  errorMessage: ctr.emailErrorText.value,
+                  controller: ctr.emailController,
                 ),
                 SizedBox(height: 20.h),
                 AppTextField(
@@ -59,62 +61,18 @@ class LoginScreen extends StatelessWidget {
                         : const Icon(Icons.visibility),
                     onPressed: () => ctr.toogleVisibility(),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    height: 50.h,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: Obx(
-                            () => CheckboxListTile(
-                              activeColor: Get.isDarkMode
-                                  ? AppColor.primaryswatch
-                                  : AppColor.primaryColor,
-                              checkboxShape: CheckboxTheme.of(context)
-                                  .shape
-                                  ?.copyWith(
-                                      side: BorderSide(
-                                          color: Get.isDarkMode
-                                              ? AppColor.primaryswatch
-                                              : AppColor.primaryColor,
-                                          width: 2.w)),
-                              value: ctr.agreeTAndC.value,
-                              onChanged: (value) {
-                                ctr.agreeTAndC.value = value!;
-                              },
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 4,
-                          child: Text(
-                            'Remember me',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Get.isDarkMode
-                                        ? AppColor.primaryswatch
-                                        : AppColor.primaryColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  onChanged: (p0) => ctr.clearError(ctr.passwordErrorText),
+                  errorMessage: ctr.passwordErrorText.value,
+                  controller: ctr.passwordController,
                 ),
                 SizedBox(height: 20.h),
                 PrimaryButton(
                   onPressed: () {
-                    Get.offAll(() => BottomTab());
+                    ctr.validateInput();
                   },
                   label: 'Sign in',
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 30.h),
                 Align(
                   alignment: Alignment.topRight,
                   child: InkWell(
@@ -131,7 +89,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                socialWidget(context),
+                socialWidget(
+                  context,
+                  googleSigin: () {
+                    ctr.googleSigin();
+                  },
+                  faceBookSigin: () {},
+                ),
                 SizedBox(height: 20.h),
                 Padding(
                   padding: EdgeInsets.only(left: 20.h),

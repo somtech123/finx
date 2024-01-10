@@ -1,7 +1,6 @@
 import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/core/shared_widgets/app_text_field.dart';
 import 'package:finx/core/shared_widgets/primary_button.dart';
-import 'package:finx/features/authentication/account_setup/screen/account_set_up_screen.dart';
 import 'package:finx/features/authentication/login/screen/login.dart';
 import 'package:finx/features/authentication/signup/controller/sign_up_controller.dart';
 import 'package:finx/features/authentication/signup/widget/social_widget.dart';
@@ -46,6 +45,9 @@ class SignUpScreen extends StatelessWidget {
                 AppTextField(
                   hintText: 'Email',
                   prefixIcon: const Icon(Icons.email),
+                  onChanged: (p0) => ctr.clearError(ctr.emailErrorText),
+                  errorMessage: ctr.emailErrorText.value,
+                  controller: ctr.emailController,
                 ),
                 SizedBox(height: 20.h),
                 AppTextField(
@@ -58,63 +60,23 @@ class SignUpScreen extends StatelessWidget {
                         : const Icon(Icons.visibility),
                     onPressed: () => ctr.toogleVisibility(),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    height: 50.h,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: Obx(
-                            () => CheckboxListTile(
-                              activeColor: Get.isDarkMode
-                                  ? AppColor.primaryswatch
-                                  : AppColor.primaryColor,
-                              checkboxShape: CheckboxTheme.of(context)
-                                  .shape
-                                  ?.copyWith(
-                                      side: BorderSide(
-                                          color: Get.isDarkMode
-                                              ? AppColor.primaryswatch
-                                              : AppColor.primaryColor,
-                                          width: 2.w)),
-                              value: ctr.agreeTAndC.value,
-                              onChanged: (value) {
-                                ctr.agreeTAndC.value = value!;
-                              },
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Text(
-                            'Remember me',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Get.isDarkMode
-                                        ? AppColor.primaryswatch
-                                        : AppColor.primaryColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  onChanged: (p0) => ctr.clearError(ctr.passwordErrorText),
+                  errorMessage: ctr.passwordErrorText.value,
+                  controller: ctr.passwordController,
                 ),
                 SizedBox(height: 20.h),
                 PrimaryButton(
                   onPressed: () {
-                    Get.to(() => AccountSetUpScreen());
+                    ctr.validateInput();
                   },
                   label: 'Sign up',
                 ),
                 SizedBox(height: 20.h),
-                socialWidget(context),
+                socialWidget(
+                  context,
+                  googleSigin: () => ctr.googleSigin(),
+                  faceBookSigin: () => ctr.facebookSigin(),
+                ),
                 SizedBox(height: 20.h),
                 Padding(
                   padding: EdgeInsets.only(left: 20.h),

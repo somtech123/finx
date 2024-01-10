@@ -4,7 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-Widget socialWidget(BuildContext context) {
+Widget socialWidget(
+  BuildContext context, {
+  required VoidCallback googleSigin,
+  required VoidCallback faceBookSigin,
+}) {
   return Column(
     children: [
       SizedBox(
@@ -54,15 +58,19 @@ Widget socialWidget(BuildContext context) {
                     Get.isDarkMode ? AppColor.whiteColor : AppColor.blackColor,
               ),
               ontap: () {}),
-          _socialLayout(context,
-              child: Image.asset(
-                'assets/images/google_icon.png',
-                height: 20.h,
-              ),
-              ontap: () {}),
-          _socialLayout(context,
-              child: SvgPicture.asset('assets/svgs/facebook.svg'),
-              ontap: () {}),
+          _socialLayout(
+            context,
+            child: Image.asset(
+              'assets/images/google_icon.png',
+              height: 20.h,
+            ),
+            ontap: googleSigin,
+          ),
+          _socialLayout(
+            context,
+            child: SvgPicture.asset('assets/svgs/facebook.svg'),
+            ontap: faceBookSigin,
+          ),
         ],
       )
     ],

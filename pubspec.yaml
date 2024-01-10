@@ -49,6 +49,15 @@ dependencies:
   intl_phone_field: ^3.1.0
   persistent_bottom_nav_bar: ^5.0.2
   pin_plus_keyboard: ^2.0.6
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.14.0
+  google_sign_in: 
+  flutter_facebook_auth: 
+  
+  flutter_spinkit: ^5.2.0
+  shared_preferences: ^2.2.2
+  
 
 dev_dependencies:
   flutter_test:

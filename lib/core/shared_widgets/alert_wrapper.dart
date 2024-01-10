@@ -3,19 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 buildCustomAlertWidgetWrapper(BuildContext context,
-    {Widget? widget,
-    Size? size,
-    Color? color = const Color(0xffEFF0F2),
-    bool barrierDismissible = true,
-    Color? bgColor}) {
+    {Widget? widget, Size? size, bool barrierDismissible = true}) {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   if (!Get.isDialogOpen!) {
     return Get.defaultDialog(
       content: Container(
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        decoration: const BoxDecoration(
+          color: Color(0xffEFF0F2),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         constraints: BoxConstraints.tightFor(
           width: size?.width ?? 400.0.w,
