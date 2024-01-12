@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   get_it: ^7.2.0
+  
+  dio: ^5.3.1
   google_fonts: ^5.1.0
   http: 
   intl: ^0.18.1
@@ -57,6 +59,9 @@ dependencies:
   
   flutter_spinkit: ^5.2.0
   shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
+  
+  cached_network_image: ^3.2.3
   
 
 dev_dependencies:

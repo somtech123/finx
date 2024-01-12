@@ -1,3 +1,5 @@
+import 'package:finx/core/constant/string_constant.dart';
+
 class UserModel {
   String? userName;
   String? id;
@@ -23,7 +25,9 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         userName: json["userName"],
         id: json["uid"],
-        profileImage: json["profileImage"],
+        profileImage: json["profileImage"].isEmpty
+            ? StringConstants.dummyProfilePicture
+            : json["profileImage"],
         firstName: json["firstName"],
         lastName: json["lastName"],
         phone: json["phone"],

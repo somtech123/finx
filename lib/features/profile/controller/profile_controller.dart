@@ -1,3 +1,4 @@
+import 'package:finx/core/global_controller.dart';
 import 'package:finx/core/services/auth_services/auth_sevices.dart';
 import 'package:finx/core/services/storage_services/storage.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final AuthServices _authservices = AuthServices();
+
+  var globalCtr = Get.find<GlobalController>();
 
   logout() async {
     Get.back();

@@ -1,4 +1,5 @@
 import 'package:finx/core/constant/app_color.dart';
+import 'package:finx/features/dashboard/screen/fund_wallet_screen.dart';
 import 'package:finx/features/payment/screen/airtime_screen.dart';
 import 'package:finx/features/payment/screen/send_money_screen.dart';
 import 'package:finx/features/payment/screen/transfer_finx.dart';
@@ -16,6 +17,7 @@ class PaymentScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor:
             Get.isDarkMode ? AppColor.blackColor : AppColor.whiteColor,
         centerTitle: true,
@@ -34,18 +36,23 @@ class PaymentScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Recent payments',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              Text(
                 'Send Money',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
+              ),
+              SizedBox(height: 20.h),
+              buildPaymentTile(
+                context,
+                text: 'Top Account',
+                leading: SvgPicture.asset(
+                  'assets/svgs/stamp.svg',
+                  height: 42.h,
+                ),
+                ontap: () {
+                  Get.to(() => FundWalletScreen());
+                },
               ),
               SizedBox(height: 20.h),
               buildPaymentTile(

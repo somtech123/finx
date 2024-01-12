@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
+import 'package:finx/core/utlis/shimmer_manager.dart';
 import 'package:finx/features/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,22 +38,31 @@ class Profile extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.h),
             child: Column(
               children: [
-                Center(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        maxRadius: 50.r,
-                      ),
-                      SizedBox(height: 20.h),
-                      Text(
-                        'Oscar Dre',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      )
-                    ],
-                  ),
+                Obx(
+                  () => ctr.globalCtr.isFetching.value == false
+                      ? prdofileShimmer(context)
+                      : Center(
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                maxRadius: 50.r,
+                                backgroundImage: CachedNetworkImageProvider(ctr
+                                    .globalCtr.loginUser.value.profileImage!),
+                              ),
+                              SizedBox(height: 20.h),
+                              Text(
+                                '${ctr.globalCtr.loginUser.value.firstName} ${ctr.globalCtr.loginUser.value.lastName}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              )
+                            ],
+                          ),
+                        ),
                 ),
                 SizedBox(height: 20.h),
                 buildProfileTile(context,
@@ -99,4 +110,19 @@ class Profile extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget prdofileShimmer(BuildContext context) {
+  return Center(
+    child: Column(
+      children: [
+        ShimmerManager.roundedShimmer(context, size: 100),
+        // SizedBox(height: 20.h),
+        // SizedBox(
+        //   width: 100.w,
+        //   child: ShimmerManager.textShimmer(context, height: 20.h),
+        // )
+      ],
+    ),
+  );
 }

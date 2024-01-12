@@ -1,4 +1,7 @@
-import 'package:finx/core/constant/string_constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finx/core/utlis/currency_utlis.dart';
+import 'package:finx/core/utlis/shimmer_manager.dart';
+import 'package:finx/features/dashboard/controller/dashboard_controller.dart';
 import 'package:finx/features/dashboard/screen/notification.dart';
 import 'package:finx/features/dashboard/widget/visa_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +12,11 @@ import 'package:get/get.dart';
 import '../../../core/constant/app_color.dart';
 import '../widget/dashboard_tran_widget.dart';
 
+// ignore: must_be_immutable
 class DashBoardScreen extends StatelessWidget {
-  const DashBoardScreen({super.key});
+  DashBoardScreen({super.key});
+
+  var ctr = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,35 +28,62 @@ class DashBoardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                headingLayout(context),
-                SizedBox(height: 5.h),
-                Text(
-                  'Total balance',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+                Obx(
+                  () => ctr.globalCtr.isFetching.value == false
+                      ? ShimmerManager.roundedShimmer(context)
+                      : headingLayout(context,
+                          userImage:
+                              ctr.globalCtr.loginUser.value.profileImage!,
+                          username: ctr.globalCtr.loginUser.value.userName!),
                 ),
                 SizedBox(height: 5.h),
-                Text(
-                  'NGN 405,297.88',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 24, fontWeight: FontWeight.w600),
+                Obx(
+                  () => ctr.globalCtr.gettingBalance.value == false
+                      ? const SizedBox.shrink()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Total balance',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(height: 5.h),
+                            Text(
+                              CurrencyUtils.formatCurrency.format(double.parse(
+                                  ctr.globalCtr.balanceModel.value.ngn!
+                                      .availableBalance!)),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
                 ),
                 SizedBox(height: 20.h),
-                // Expanded(
-                //   child: ListView(
-                //     scrollDirection: Axis.horizontal,
-                //     children: [
-
-                //       VisaCardWidget(),
-                //       VisaCardWidget()
-                //     ],
-                //   ),
-                // ),
-                VisaCardWidget(),
+                Obx(
+                  () => ctr.globalCtr.isFetchingAcctInfo.value == false
+                      ? ShimmerManager.sectionShimmer(
+                          context,
+                        )
+                      : VisaCardWidget(
+                          acctNumber:
+                              ctr.globalCtr.accountInfo.value.accountNumber!,
+                          // .substring(ctr.globalCtr.accountInfo.value
+                          //         .accountNumber!.length -
+                          //     4),
+                          accountSatus:
+                              ctr.globalCtr.accountInfo.value.accountStatus!,
+                          createdAt: ctr.globalCtr.accountInfo.value.createdAt!,
+                        ),
+                ),
                 SizedBox(height: 30.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -96,12 +129,20 @@ class DashBoardScreen extends StatelessWidget {
     );
   }
 
-  Widget headingLayout(BuildContext context) {
+  Widget headingLayout(BuildContext context,
+      {required String userImage, required String username}) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
         maxRadius: 20.r,
-        backgroundImage: NetworkImage(StringConstants.dummyProfilePicture),
+        backgroundImage: CachedNetworkImageProvider(userImage),
+      ),
+      title: Text(
+        'Hi, $username',
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -112,7 +153,7 @@ class DashBoardScreen extends StatelessWidget {
           ),
           SizedBox(width: 16.w),
           InkWell(
-            onTap: () => Get.to(() => NotificationScreen()),
+            onTap: () => Get.to(() => const NotificationScreen()),
             child: SvgPicture.asset(
               'assets/svgs/icons8_notification.svg',
               color:

@@ -1,16 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finx/core/model/user_model.dart';
+import 'package:finx/core/services/account/account_repo_implementation.dart';
+import 'package:finx/core/services/account/usecase.dart';
 import 'package:finx/core/services/auth_services/auth_repo.dart';
 import 'package:finx/core/services/storage_services/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServices implements AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final _storage = StorageService();
+
+  final AccountServices _accountServices =
+      AccountServices(Get.put(AccountRepoImplementation()));
 
   //register user
 
@@ -20,15 +26,32 @@ class AuthServices implements AuthRepository {
       required String password,
       required UserModel payload}) async {
     String res = "Some error occurred";
+
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
       await _createFireStoreUser(payload, cred.user!.uid);
 
-      await _saveToken(_auth.currentUser!);
+      Map<String, dynamic> data() => {
+            "account_name": "${payload.firstName} ${payload.lastName}",
+            "account_reference": _auth.currentUser!.uid,
+            "permanent": true,
+            "bank_code": "000",
+            "customer": {
+              "name": "${payload.firstName} ${payload.lastName}",
+              "email": email
+            }
+          };
 
-      res = 'success';
+      var resp = await _accountServices.createVirtualAccount(data());
+      if (resp.status!) {
+        await _saveToken(_auth.currentUser!);
+
+        res = 'success';
+      } else {
+        res = resp.message!;
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         res = 'The password provided is too weak.';
