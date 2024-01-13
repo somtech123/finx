@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
       style: Theme.of(context)
           .textTheme
           .bodyLarge!
-          .copyWith(fontSize: 20, color: AppColor.blackColor),
+          .copyWith(fontSize: 15, color: AppColor.blackColor),
       decoration: InputDecoration(
         label: Text(label!),
         labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(

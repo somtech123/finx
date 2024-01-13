@@ -1,4 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+import 'package:finx/core/helper/image_helper.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
 import 'package:finx/core/utlis/shimmer_manager.dart';
 import 'package:finx/features/profile/controller/profile_controller.dart';
@@ -11,9 +12,25 @@ import '../../../core/constant/app_color.dart';
 import '../widget/build_profile_tile.dart';
 
 // ignore: must_be_immutable
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   Profile({super.key});
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   var ctr = Get.put(ProfileController());
+
+  File? selectedImage;
+
+  selectGalleryImage() async {
+    var file = await ImageHelper.getFromGallery(false);
+    setState(() {
+      selectedImage = file;
+    });
+    await ctr.globalCtr.updateProfilePhoto(selectedImage!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +61,49 @@ class Profile extends StatelessWidget {
                       : Center(
                           child: Column(
                             children: [
-                              CircleAvatar(
-                                maxRadius: 50.r,
-                                backgroundImage: CachedNetworkImageProvider(ctr
-                                    .globalCtr.loginUser.value.profileImage!),
-                              ),
+                              selectedImage == null
+                                  ? CircleAvatar(
+                                      radius: 50.r,
+                                      backgroundColor: Colors.transparent,
+                                      backgroundImage: NetworkImage(ctr
+                                          .globalCtr
+                                          .loginUser
+                                          .value
+                                          .profileImage!),
+                                      child: ClipOval(
+                                        child: Stack(
+                                          children: [
+                                            // CachedNetworkImage(
+                                            //     imageUrl: ctr.globalCtr.loginUser
+                                            //         .value.profileImage!),
+                                            Positioned(
+                                              bottom: 0,
+                                              right: 0,
+                                              left: 0,
+                                              height: 30.h,
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    selectGalleryImage(),
+                                                child: Container(
+                                                  height: 20.h,
+                                                  width: 30.w,
+                                                  decoration: BoxDecoration(
+                                                      color: Get.isDarkMode
+                                                          ? Colors.grey
+                                                          : Colors.black),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                        Icons.photo_camera,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : _imageWidget(file: selectedImage!),
                               SizedBox(height: 20.h),
                               Text(
                                 '${ctr.globalCtr.loginUser.value.firstName} ${ctr.globalCtr.loginUser.value.lastName}',
@@ -106,6 +161,38 @@ class Profile extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _imageWidget({required File file}) {
+    return CircleAvatar(
+      radius: 50.r,
+      backgroundColor: Colors.transparent,
+      backgroundImage: FileImage(file),
+      child: ClipOval(
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              height: 30.h,
+              child: GestureDetector(
+                onTap: () => selectGalleryImage(),
+                child: Container(
+                  height: 20.h,
+                  width: 30.w,
+                  decoration: BoxDecoration(
+                      color: Get.isDarkMode ? Colors.grey : Colors.black),
+                  child: const Center(
+                    child: Icon(Icons.photo_camera, color: Colors.white),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

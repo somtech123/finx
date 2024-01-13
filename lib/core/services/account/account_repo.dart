@@ -6,4 +6,6 @@ abstract class AccountRepository {
   getAccountInfo({required String accountRef});
 
   fundAccount(Map<String, dynamic> payload);
+
+  getTranscationHistory(Map<String, dynamic> payload);
 }

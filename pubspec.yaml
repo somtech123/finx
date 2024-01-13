@@ -56,12 +56,17 @@ dependencies:
   cloud_firestore: ^4.14.0
   google_sign_in: 
   flutter_facebook_auth: 
+  firebase_storage: ^11.6.0
   
   flutter_spinkit: ^5.2.0
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
   
   cached_network_image: ^3.2.3
+  another_flushbar: ^1.12.30
+  image_picker: ^1.0.7
+  image_cropper: ^5.0.1
+  flutter_native_image: ^0.0.6+1
   
 
 dev_dependencies:

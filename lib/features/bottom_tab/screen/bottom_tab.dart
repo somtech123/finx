@@ -2,7 +2,7 @@ import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/features/bottom_tab/controller/bottom_tab_controller.dart';
 import 'package:finx/features/card/screen/card_screen.dart';
 import 'package:finx/features/dashboard/screen/dashboard.dart';
-import 'package:finx/features/history/screen/history_screen.dart';
+import 'package:finx/features/history/screen/tran_history_screen.dart';
 import 'package:finx/features/payment/screen/payment_screen.dart';
 import 'package:finx/features/profile/screen/profile.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _BottomTabState extends State<BottomTab> {
       DashBoardScreen(),
       PaymentScreen(),
       CardScreen(),
-      HistoryScreen(),
+      TranscationHistoryScreen(),
       Profile()
     ];
   }

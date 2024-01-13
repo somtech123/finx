@@ -2,6 +2,7 @@ import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/core/shared_widgets/primary_button.dart';
 import 'package:finx/features/dashboard/controller/fund_account_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -106,6 +107,10 @@ class FundWalletScreen extends StatelessWidget {
                         return null;
                       },
                       controller: ctr.acctNumberCtr,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      ],
                     ),
                     SizedBox(height: 20.h),
                     InkWell(
@@ -148,6 +153,10 @@ class FundWalletScreen extends StatelessWidget {
                     AppTextField(
                       hintText: 'Amout',
                       controller: ctr.amountCtr,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      ],
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return 'This Field is required';

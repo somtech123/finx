@@ -1,3 +1,5 @@
+import 'package:finx/core/services/account/model/transcation_model.dart';
+import 'package:finx/core/utlis/currency_utlis.dart';
 import 'package:finx/features/history/controller/tran_receipt_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +12,10 @@ import '../widget/grey_container.dart';
 
 // ignore: must_be_immutable
 class TranscationReceipt extends StatelessWidget {
-  TranscationReceipt({super.key});
+  TranscationReceipt({super.key, required this.transaction});
   var ctr = Get.put(TranscationReceiptController());
+
+  final Transaction transaction;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,7 @@ class TranscationReceipt extends StatelessWidget {
       backgroundColor: AppColor.lightBg,
       appBar: AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
         centerTitle: true,
         title: Text(
           'Receipt',
@@ -40,14 +45,14 @@ class TranscationReceipt extends StatelessWidget {
                 child: Column(
                   children: [
                     greyContainer(context),
-                    SizedBox(height: 10.h),
-                    Text(
-                      "On SEP 20, 2023 at 08:11 PM",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 12,
-                          color: AppColor.blackColor,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    // SizedBox(height: 10.h),
+                    // Text(
+                    //   "On SEP 20, 2023 at 08:11 PM",
+                    //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    //       fontSize: 12,
+                    //       color: AppColor.blackColor,
+                    //       fontWeight: FontWeight.w600),
+                    // ),
                   ],
                 ),
               ),
@@ -56,7 +61,8 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Transaction ID',
-                  controller: ctr.tranId,
+                  controller:
+                      TextEditingController(text: transaction.reference),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -64,7 +70,8 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Recipient Name',
-                  controller: ctr.recipientName,
+                  controller: TextEditingController(
+                      text: transaction.payerBankAccount!.payerAccountName),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -72,7 +79,8 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Description',
-                  controller: ctr.description,
+                  controller:
+                      TextEditingController(text: transaction.description),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -80,7 +88,8 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Bank Name',
-                  controller: ctr.bankName,
+                  controller: TextEditingController(
+                      text: transaction.payerBankAccount!.payerBank),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -88,7 +97,8 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Account Number',
-                  controller: ctr.accountNumber,
+                  controller: TextEditingController(
+                      text: transaction.payerBankAccount!.payerAccountNumber),
                 ),
               ),
               SizedBox(height: 10.h),
@@ -96,7 +106,19 @@ class TranscationReceipt extends StatelessWidget {
                 absorbing: true,
                 child: CustomTextField(
                   label: 'Amount',
-                  controller: ctr.amount,
+                  controller: TextEditingController(
+                      text: CurrencyUtils.formatCurrency
+                          .format(double.parse(transaction.amount!))),
+                ),
+              ),
+              SizedBox(height: 10.h),
+              AbsorbPointer(
+                absorbing: true,
+                child: CustomTextField(
+                  label: 'Fees',
+                  controller: TextEditingController(
+                      text: CurrencyUtils.formatCurrency
+                          .format(double.parse(transaction.fee!))),
                 ),
               ),
               SizedBox(height: 20.h),

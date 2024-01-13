@@ -6,4 +6,6 @@ class Endpoints {
   static const getBalance = '/merchant/api/v1/balances';
   static const fundAcct =
       '/merchant/api/v1/virtual-bank-account/sandbox/credit';
+  static const getTransaction =
+      '/merchant/api/v1/virtual-bank-account/transactions';
 }

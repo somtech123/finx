@@ -41,4 +41,14 @@ class AccountRepoImplementation implements AccountRepository {
       return _api.handleError(e);
     }
   }
+
+  @override
+  getTranscationHistory(Map<String, dynamic> payload) async {
+    try {
+      return await _api.dio
+          .get(Endpoints.getTransaction, queryParameters: payload);
+    } on DioError catch (e) {
+      return _api.handleError(e);
+    }
+  }
 }

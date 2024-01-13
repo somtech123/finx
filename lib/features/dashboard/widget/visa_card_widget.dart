@@ -1,4 +1,5 @@
 import 'package:finx/core/constant/app_color.dart';
+import 'package:finx/core/utlis/Utils.dart';
 import 'package:finx/core/utlis/currency_utlis.dart';
 import 'package:finx/features/dashboard/controller/dashboard_controller.dart';
 import 'package:finx/features/dashboard/screen/fund_wallet_screen.dart';
@@ -98,19 +99,22 @@ class VisaCardWidget extends StatelessWidget {
         Positioned(
           left: 20.h,
           bottom: 30.h,
-          child: Container(
-            height: 25.h,
-            width: 100.w,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.r),
-                color: AppColor.whiteColor),
-            alignment: Alignment.center,
-            child: Text(
-              acctNumber,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.blackColor),
+          child: InkWell(
+            onTap: () => Utils.copyToClipBoard(context, text: acctNumber),
+            child: Container(
+              height: 25.h,
+              width: 100.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.r),
+                  color: AppColor.whiteColor),
+              alignment: Alignment.center,
+              child: Text(
+                acctNumber,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.blackColor),
+              ),
             ),
           ),
         ),
