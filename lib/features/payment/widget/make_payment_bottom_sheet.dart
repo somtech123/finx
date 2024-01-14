@@ -5,52 +5,41 @@ import 'package:get/get.dart';
 
 import '../../../core/constant/app_color.dart';
 import '../../../core/shared_widgets/screen_keyboard.dart';
-import '../screen/tran_success_screen.dart';
 
-buildMakePaymentBottomSheet(BuildContext context) {
+buildMakePaymentBottomSheet(BuildContext context,
+    {required VoidCallback ontap}) {
   return Get.bottomSheet(
       Material(
-        borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(25.r), topLeft: Radius.circular(25.r)),
         child: FractionallySizedBox(
-          heightFactor: 0.7,
+          heightFactor: 0.6,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.h),
             child: Column(
               children: [
-                SizedBox(height: 20.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(width: 50.w),
-                    Text(
-                      'Transcation pin',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: SizedBox(width: 50.w),
+                  title: Text(
+                    'Enter Payment pin',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  trailing: InkWell(
+                    onTap: () => Get.back(),
+                    child: SvgPicture.asset(
+                      'assets/svgs/icons8_Close.svg',
+                      color: Get.isDarkMode
+                          ? AppColor.whiteColor
+                          : AppColor.primaryColor,
                     ),
-                    SizedBox(width: 50.w),
-                    InkWell(
-                      onTap: () => Get.back(),
-                      child: SvgPicture.asset(
-                        'assets/svgs/icons8_Close.svg',
-                        color: Get.isDarkMode
-                            ? AppColor.whiteColor
-                            : AppColor.primaryColor,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                SizedBox(height: 20.h),
-                ScreenKeyboard(
-                  onchange: () {
-                    Get.to(() => const TransactionSuccessScreen(
-                          successText:
-                              "Airtime Recharche has been completed successfully",
-                        ));
-                  },
-                )
+                SizedBox(height: 10.h),
+                ScreenKeyboard(onchange: ontap)
               ],
             ),
           ),

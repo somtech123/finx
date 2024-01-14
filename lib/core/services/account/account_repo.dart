@@ -8,4 +8,6 @@ abstract class AccountRepository {
   fundAccount(Map<String, dynamic> payload);
 
   getTranscationHistory(Map<String, dynamic> payload);
+
+  resolveBankAcct(Map<String, dynamic> payload);
 }

@@ -72,7 +72,7 @@ class TransferFinXScreen extends StatelessWidget {
               SizedBox(height: 120.h),
               PrimaryButton(
                 onPressed: () {
-                  Get.to(() => MakePaymentScreen());
+                  //    Get.to(() => MakePaymentScreen());
                 },
                 label: 'Next',
               ),

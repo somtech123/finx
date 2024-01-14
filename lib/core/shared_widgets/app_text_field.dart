@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:finx/core/constant/app_color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -52,44 +55,42 @@ class AppTextField extends StatelessWidget {
   // final String? helperText;
 
   final String? Function(String?)? validator;
-  
+
   final VoidCallback? ontap;
   final VoidCallback? onEdittingComplete;
   final void Function(String)? onFieldSubmitted;
 
-  AppTextField(
-      {this.hintText,
-      this.suffixIcon,
-      this.prefixIcon,
-      this.onChanged,
-      this.keyboardType,
-      this.errorMessage,
-      this.controller,
-      this.focusNode,
-      this.borderRadius = 6.0,
-      this.enabled = true,
-      this.inputFormatters,
-      this.maxLines,
-      this.hintStyle,
-      this.helperText,
-      this.enableInteractiveSelection = true,
-      this.obscureText = false,
-      this.isTransparentBorder = false,
-      this.textCapitalization = TextCapitalization.none,
-      this.borderColor = Colors.transparent,
-      this.validator,
-      // AppColor.greyColor,
-      this.textColor,
-      // this.helperText,
-      this.maxLength = TextField.noMaxLength,
-      this.textStyle,
-      this.inputDecoration,
-        this.onFieldSubmitted,
-      this.ontap,
-      
-      this.onEdittingComplete,
-      
-      });
+  AppTextField({
+    this.hintText,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.onChanged,
+    this.keyboardType,
+    this.errorMessage,
+    this.controller,
+    this.focusNode,
+    this.borderRadius = 6.0,
+    this.enabled = true,
+    this.inputFormatters,
+    this.maxLines,
+    this.hintStyle,
+    this.helperText,
+    this.enableInteractiveSelection = true,
+    this.obscureText = false,
+    this.isTransparentBorder = false,
+    this.textCapitalization = TextCapitalization.none,
+    this.borderColor = Colors.transparent,
+    this.validator,
+    // AppColor.greyColor,
+    this.textColor,
+    // this.helperText,
+    this.maxLength = TextField.noMaxLength,
+    this.textStyle,
+    this.inputDecoration,
+    this.onFieldSubmitted,
+    this.ontap,
+    this.onEdittingComplete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +109,6 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText,
       maxLines: maxLines ?? 1,
       keyboardType: keyboardType,
-      
       maxLength: maxLength,
       style: textStyle ??
           Theme.of(context).textTheme.headline5!.copyWith(fontSize: sh(13)),

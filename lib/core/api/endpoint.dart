@@ -8,4 +8,6 @@ class Endpoints {
       '/merchant/api/v1/virtual-bank-account/sandbox/credit';
   static const getTransaction =
       '/merchant/api/v1/virtual-bank-account/transactions';
+  static const getAllBanks = '/merchant/api/v1/misc/banks';
+  static const resolveBank = '/merchant/api/v1/misc/banks/resolve';
 }

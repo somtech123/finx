@@ -1,6 +1,8 @@
 import 'package:finx/core/constant/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ScreenKeyboard extends StatefulWidget {
   const ScreenKeyboard({super.key, required this.onchange});
@@ -17,7 +19,7 @@ class _ScreenKeyboardState extends State<ScreenKeyboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
       child: Column(
         children: [
           otpScreen(context),
@@ -82,19 +84,24 @@ class _ScreenKeyboardState extends State<ScreenKeyboard> {
         (index) {
           return Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.all(6.h),
+              margin: EdgeInsets.all(16.h),
               width: 16.w,
-              height: index < enteredPin.length ? 20.h : 10.h,
+              height: 20.h,
               decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: AppColor.primaryColor),
+                  shape: BoxShape.circle, color: AppColor.grey),
               child: index < enteredPin.length
-                  ? Center(
-                      child: Text(enteredPin[index],
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontSize: 15.sp,
-                                    color: AppColor.lightBg,
-                                  )),
+                  ? FittedBox(
+                      fit: BoxFit.fill,
+                      child: Text(
+                        enteredPin[index].replaceAll(RegExp(r"."), "⬮"),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: 50.h,
+                              color: Get.isDarkMode
+                                  ? AppColor.darkBg
+                                  : AppColor.lightBg,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     )
                   : null);
         },
@@ -104,7 +111,7 @@ class _ScreenKeyboardState extends State<ScreenKeyboard> {
 
   Widget numButton({required int number}) {
     return Padding(
-      padding: EdgeInsets.only(top: 16.h),
+      padding: EdgeInsets.only(top: 10.h),
       child: TextButton(
         onPressed: () {
           setState(() {

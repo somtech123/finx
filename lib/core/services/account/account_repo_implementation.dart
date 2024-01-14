@@ -51,4 +51,14 @@ class AccountRepoImplementation implements AccountRepository {
       return _api.handleError(e);
     }
   }
+
+  @override
+  resolveBankAcct(Map<String, dynamic> payload)async {
+    try {
+      return await _api.dio
+          .post(Endpoints.resolveBank, data: payload);
+    } on DioError catch (e) {
+      return _api.handleError(e);
+    }
+  }
 }

@@ -96,7 +96,7 @@ class DashBoardScreen extends StatelessWidget {
                     headerButton(context,
                         icon: SvgPicture.asset('assets/svgs/transfer.svg'),
                         ontap: () {
-                      Get.to(() => const SendMoneyScreen());
+                      Get.to(() => SendMoneyScreen());
                     }, text: 'Transfer'),
                     headerButton(context,
                         icon: SvgPicture.asset('assets/svgs/pay_bill_icon.svg'),
