@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/services/auth_services/auth_sevices.dart';
 import '../../../../core/shared_widgets/alert_diaglog.dart';
+import '../../account_setup/screen/pin_set_up.dart';
 
 class SignUpController extends GetxController {
   RxBool isVisbile = true.obs;
@@ -53,8 +54,11 @@ class SignUpController extends GetxController {
 
     String res = await _authservices.googleSigin();
     Get.back();
+
     if (res == 'success') {
       Get.offAll(() => BottomTab());
+    } else if (res == 'inactive') {
+      Get.to(() => const PinSetUpScreen());
     } else {
       showErrorAlertWidget(Get.context!, message: res);
     }
@@ -67,6 +71,8 @@ class SignUpController extends GetxController {
     Get.back();
     if (res == 'success') {
       Get.offAll(() => BottomTab());
+    } else if (res == 'inactive') {
+      Get.to(() => const PinSetUpScreen());
     } else {
       showErrorAlertWidget(Get.context!, message: res);
     }

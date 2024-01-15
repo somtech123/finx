@@ -136,6 +136,17 @@ class AuthServices implements AuthRepository {
     return null;
   }
 
+  Map<String, dynamic> socialPayload(UserCredential? userCredential) => {
+        "account_name": "${userCredential!.user!.displayName}",
+        "account_reference": _auth.currentUser!.uid,
+        "permanent": true,
+        "bank_code": "000",
+        "customer": {
+          "name": "${userCredential.user!.displayName}",
+          "email": '${userCredential.user!.email}'
+        }
+      };
+
   @override
   Future<String> googleSigin() async {
     String res = "Some error occurred";
@@ -143,10 +154,16 @@ class AuthServices implements AuthRepository {
       UserCredential? userCredential = await _getGooglecredential();
       if (userCredential != null) {
         if (userCredential.additionalUserInfo!.isNewUser) {
-          _createFireStoreUserwithCredential(userCredential);
+          await _createFireStoreUserwithCredential(userCredential);
 
-          await _saveToken(_auth.currentUser!);
-          res = 'success';
+          var resp = await _accountServices
+              .createVirtualAccount(socialPayload(userCredential));
+          if (resp.status!) {
+            await _saveToken(_auth.currentUser!);
+            res = 'inactive';
+          } else {
+            res = resp.message!;
+          }
         } else {
           await _saveToken(_auth.currentUser!);
           res = 'success';
@@ -181,10 +198,17 @@ class AuthServices implements AuthRepository {
       UserCredential userCredential = await _getFacebookCredential();
       if (userCredential != null) {
         if (userCredential.additionalUserInfo!.isNewUser) {
-          _createFireStoreUserwithCredential(userCredential);
+          await _createFireStoreUserwithCredential(userCredential);
 
-          await _saveToken(_auth.currentUser!);
-          res = 'success';
+          var resp = await _accountServices
+              .createVirtualAccount(socialPayload(userCredential));
+          if (resp.status!) {
+            await _saveToken(_auth.currentUser!);
+
+            res = 'inactive';
+          } else {
+            res = resp.message!;
+          }
         } else {
           await _saveToken(_auth.currentUser!);
           res = 'success';

@@ -151,4 +151,24 @@ class AccountServices {
       data: response.data?['data']?.fromJson() ?? ResolvedAcctModel(),
     );
   }
+
+  Future<ResponseModel> makeTransfer(Map<String, dynamic> payload) async {
+    Response response = await accountRepoImplementation.makeTransfer(payload);
+    int statusCode = response.statusCode ?? 000;
+    debugPrint(
+        'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDstatus: [INFO] ${response.statusCode}');
+    debugPrint('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDdata: [INFO] ${response.data}');
+
+    if (statusCode >= 200 && statusCode <= 300) {
+      return ResponseModel(
+        status: true,
+        message: response.statusMessage,
+        data: response.data,
+      );
+    }
+    return ResponseModel(
+      status: false,
+      message: response.data['message']['message'],
+    );
+  }
 }

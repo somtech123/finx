@@ -42,7 +42,7 @@ class TranscationHistoryScreen extends StatelessWidget {
                       ctr.globalCtr.transcationModel.value.transactions!.isEmpty
                           ? Center(
                               child: Text(
-                                'Your Transaction history is empty',
+                                'Transaction History would show here...',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!

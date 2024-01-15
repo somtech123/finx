@@ -96,12 +96,8 @@ class MakePaymentScreen extends StatelessWidget {
                   onPressed: () => buildMakePaymentBottomSheet(
                     context,
                     ontap: () {
-                      Get.to(
-                        () => const TransactionSuccessScreen(
-                          successText:
-                              "Airtime Recharche has been completed successfully",
-                        ),
-                      );
+                      Get.back();
+                      ctr.makeTransfer();
                     },
                   ),
                   label: 'Confirm & Send',

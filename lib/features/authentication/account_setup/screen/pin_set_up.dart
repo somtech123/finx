@@ -4,21 +4,18 @@ import 'package:finx/features/authentication/account_setup/controller/pin_set_up
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pinput/pinput.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 // ignore: must_be_immutable
-class PinSetUpScreen extends StatelessWidget {
-  PinSetUpScreen({super.key});
+class PinSetUpScreen extends StatefulWidget {
+  const PinSetUpScreen({super.key});
 
+  @override
+  State<PinSetUpScreen> createState() => _PinSetUpScreenState();
+}
+
+class _PinSetUpScreenState extends State<PinSetUpScreen> {
   var ctr = Get.put(PinSetUpController());
-
-  final FocusNode _pinPutFocusNode = FocusNode();
-
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      color: AppColor.primaryColor.withOpacity(.1),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,60 +50,127 @@ class PinSetUpScreen extends StatelessWidget {
                   SizedBox(height: 35.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.h),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Pinput(
-                        controller: ctr.otpController,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        defaultPinTheme: PinTheme(
-                          decoration: _pinPutDecoration,
-                          width: Get.width * .15,
-                          height: 50,
-                          constraints: BoxConstraints(
-                              minHeight: 50.0, minWidth: Get.width * .15),
-                          margin: EdgeInsets.only(right: 10.h),
-                        ),
-                        submittedPinTheme: PinTheme(
-                            width: Get.width * .15,
-                            height: 50,
-                            constraints: BoxConstraints(
-                                minHeight: 50.0, minWidth: Get.width * .15),
-                            decoration: _pinPutDecoration.copyWith(
-                              borderRadius: BorderRadius.circular(20.0),
-                            )),
-                        focusedPinTheme: PinTheme(
-                          decoration: _pinPutDecoration,
-                          width: Get.width * .15,
-                          height: 50,
-                          constraints: BoxConstraints(
-                              minHeight: 50.0, minWidth: Get.width * .15),
-                        ),
-                        followingPinTheme: PinTheme(
-                            width: Get.width * .15,
-                            height: 50,
-                            constraints: BoxConstraints(
-                                minHeight: 50.0, minWidth: Get.width * .15),
-                            decoration: _pinPutDecoration.copyWith(
-                              borderRadius: BorderRadius.circular(5.0),
-                              border: Border.all(
-                                color: Get.isDarkMode
-                                    ? AppColor.greyColor
-                                    : AppColor.greyColor,
-                              ),
-                            )),
-                        length: 4,
-                        onSubmitted: (String pin) => debugPrint(pin),
-                        focusNode: _pinPutFocusNode,
+                    child: PinCodeTextField(
+                      length: 4,
+                      autoFocus: false,
+                      obscureText: true,
+                      blinkWhenObscuring: true,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
+                      animationType: AnimationType.fade,
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(5),
+                        fieldHeight: 50,
+                        fieldWidth: 40,
+                        activeColor: Colors.green,
+                        activeFillColor: AppColor.lightBg,
+                        selectedColor: Colors.amber,
+                        selectedFillColor: AppColor.lightBg,
+                        inactiveColor: AppColor.grey,
+                        inactiveFillColor: AppColor.lightBg,
                       ),
+                      animationDuration: const Duration(milliseconds: 300),
+                      backgroundColor: Colors.transparent,
+                      enableActiveFill: true,
+                      controller: ctr.otpController,
+                      onCompleted: (cc) {
+                        setState(
+                          () => ctr.showConfirmPasscode.value = true,
+                        );
+                      },
+                      onChanged: (value) {
+                        setState(() {});
+                      },
+                      beforeTextPaste: (text) {
+                        return false;
+                      },
+                      appContext: context,
                     ),
                   ),
-                  SizedBox(height: 200.h),
-                  PrimaryButton(
-                    onPressed: () {
-                      //   Get.to(() => BvnVerificationScreen());
-                    },
-                    label: 'Continue',
+                  Obx(
+                    () => ctr.showConfirmPasscode.value == true
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.h, vertical: 20.h),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Confirm the code you entered",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                SizedBox(height: 20.h),
+                                PinCodeTextField(
+                                  length: 4,
+                                  autoFocus: true,
+                                  obscureText: true,
+                                  blinkWhenObscuring: true,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.number,
+                                  animationType: AnimationType.fade,
+                                  pinTheme: PinTheme(
+                                    shape: PinCodeFieldShape.box,
+                                    borderRadius: BorderRadius.circular(5),
+                                    fieldHeight: 50,
+                                    fieldWidth: 40,
+                                    activeColor: Colors.green,
+                                    activeFillColor: AppColor.lightBg,
+                                    selectedColor: Colors.amber,
+                                    selectedFillColor: AppColor.lightBg,
+                                    inactiveColor: AppColor.grey,
+                                    inactiveFillColor: AppColor.lightBg,
+                                  ),
+                                  animationDuration:
+                                      const Duration(milliseconds: 300),
+                                  backgroundColor: Colors.transparent,
+                                  enableActiveFill: true,
+                                  controller: ctr.confirmOtpController,
+                                  onCompleted: (cc) {
+                                    ctr.handleCreatePassword(context);
+                                  },
+                                  onChanged: (value) {
+                                    setState(() {});
+                                  },
+                                  beforeTextPaste: (text) {
+                                    return false;
+                                  },
+                                  appContext: context,
+                                ),
+                                SizedBox(height: 20.h),
+                                Text(
+                                  ctr.errorText.value,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
+                  SizedBox(height: 200.h),
+                  Obx(
+                    () => ctr.validpin.value == true
+                        ? PrimaryButton(
+                            onPressed: () {
+                              ctr.setSecurityPin();
+                            },
+                            label: 'Continue',
+                          )
+                        : SizedBox.shrink(),
+                  )
                 ],
               ),
             ),

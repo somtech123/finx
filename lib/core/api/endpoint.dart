@@ -10,4 +10,5 @@ class Endpoints {
       '/merchant/api/v1/virtual-bank-account/transactions';
   static const getAllBanks = '/merchant/api/v1/misc/banks';
   static const resolveBank = '/merchant/api/v1/misc/banks/resolve';
+  static const Maketransfer = '/merchant/api/v1/transactions/disburse';
 }

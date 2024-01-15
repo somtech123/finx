@@ -14,7 +14,19 @@ class DashBoardTranWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ctr.globalCtr.transcationModel.value.transactions!.isEmpty
-        ? const SizedBox.shrink()
+        ? Column(
+            children: [
+              Center(
+                child: Text(
+                  'Transaction History would show here...',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+              )
+            ],
+          )
         : SizedBox(
             height: Get.height * 0.4,
             child: Container(

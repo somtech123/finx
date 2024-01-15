@@ -2,6 +2,7 @@ import 'package:finx/core/model/user_model.dart';
 import 'package:finx/core/services/auth_services/auth_sevices.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
 import 'package:finx/core/shared_widgets/loading_widget.dart';
+import 'package:finx/features/authentication/account_setup/screen/pin_set_up.dart';
 import 'package:finx/features/bottom_tab/screen/bottom_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class ProfileSetUpController extends GetxController {
     );
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.to(() => const PinSetUpScreen());
     } else {
       Get.back();
 
