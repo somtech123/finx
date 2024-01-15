@@ -1,19 +1,19 @@
 import 'package:finx/core/constant/app_color.dart';
+import 'package:finx/features/payment/controller/send_mooney_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ScreenKeyboard extends StatefulWidget {
-  const ScreenKeyboard({super.key, required this.onchange});
-
-  final VoidCallback onchange;
+  const ScreenKeyboard({super.key});
 
   @override
   State<ScreenKeyboard> createState() => _ScreenKeyboardState();
 }
 
 class _ScreenKeyboardState extends State<ScreenKeyboard> {
+  var ctr = Get.find<SendMoneyController>();
+
   String enteredPin = '';
 
   @override
@@ -51,6 +51,7 @@ class _ScreenKeyboardState extends State<ScreenKeyboard> {
                       setState(
                         () {
                           if (enteredPin.isNotEmpty) {
+                            ctr.pinErrorText.value = '';
                             enteredPin =
                                 enteredPin.substring(0, enteredPin.length - 1);
 
@@ -121,7 +122,8 @@ class _ScreenKeyboardState extends State<ScreenKeyboard> {
               debugPrint(enteredPin);
               if (enteredPin.length == 4) {
                 debugPrint('success');
-                widget.onchange();
+                ctr.validateWallet(enteredPin);
+                // widget.onchange();
               }
             }
           });

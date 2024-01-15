@@ -3,6 +3,7 @@ import 'package:finx/core/services/account/account_repo_implementation.dart';
 import 'package:finx/core/services/account/usecase.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
 import 'package:finx/core/shared_widgets/loading_widget.dart';
+import 'package:finx/features/payment/screen/tran_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class FundWalletController extends GetxController {
 
   Map<String, dynamic> payload() => {
         "account_number": acctNumberCtr.text,
-        "amount": amountCtr.text,
+        "amount": amountCtr.text.replaceAll(',', ''),
         "currency": "NGN"
       };
 
@@ -29,7 +30,10 @@ class FundWalletController extends GetxController {
     Get.back();
 
     if (res.status!) {
-      globalCtr.fetchBalance(hasShimmer: false);
+      // globalCtr.fetchBalance(hasShimmer: false);
+      Get.to(() => const TransactionSuccessScreen(
+            successText: "Transfer initiated successfully",
+          ));
     } else {
       showErrorAlertWidget(Get.context!, message: res.message);
     }

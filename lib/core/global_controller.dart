@@ -6,6 +6,7 @@ import 'package:finx/core/services/account/model/account_info_model.dart';
 import 'package:finx/core/services/account/model/balance_model.dart';
 import 'package:finx/core/services/account/model/transcation_model.dart';
 import 'package:finx/core/services/account/usecase.dart';
+import 'package:finx/core/services/user_services/model/wallet_model.dart';
 import 'package:finx/core/services/user_services/usecase.dart';
 import 'package:finx/core/shared_widgets/alert_diaglog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +26,8 @@ class GlobalController extends GetxController {
 
   Rx<UserModel> loginUser = UserModel().obs;
 
+  Rx<WalletModel> walletData = WalletModel().obs;
+
   Rx<AccountInfoModel> accountInfo = AccountInfoModel().obs;
   Rx<BalanceModel> balanceModel = BalanceModel().obs;
   Rx<TransactionModel> transcationModel = TransactionModel().obs;
@@ -41,6 +44,11 @@ class GlobalController extends GetxController {
 
     isFetching.value = true;
     return isFetching.value;
+  }
+
+  getWallet() async {
+    walletData.value = await _userServices.getWalletData();
+    debugPrint(walletData.value.wallet);
   }
 
   fetchBalance({bool? hasShimmer = true}) async {

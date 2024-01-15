@@ -12,6 +12,7 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor:
             Get.isDarkMode ? AppColor.blackColor : AppColor.whiteColor,
         iconTheme: IconThemeData(
@@ -20,7 +21,7 @@ class NotificationScreen extends StatelessWidget {
         title: Text(
           'Notification',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 24,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
         ),
@@ -50,26 +51,9 @@ class NotificationScreen extends StatelessWidget {
                             buildNotificationTile(context),
                         itemCount: 2,
                         separatorBuilder: (context, index) =>
-                            SizedBox(height: 20.h),
+                            SizedBox(height: 5.h),
                       ),
                     ),
-                    Text(
-                      'Yesterday',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: ListView.separated(
-                        itemBuilder: (context, index) =>
-                            buildNotificationTile(context),
-                        itemCount: 2,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 20.h),
-                      ),
-                    )
                   ],
                 ),
               )

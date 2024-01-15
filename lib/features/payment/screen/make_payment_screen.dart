@@ -1,7 +1,6 @@
 import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/core/utlis/currency_utlis.dart';
 import 'package:finx/features/payment/controller/send_mooney_controller.dart';
-import 'package:finx/features/payment/screen/tran_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -95,10 +94,6 @@ class MakePaymentScreen extends StatelessWidget {
                 PrimaryButton(
                   onPressed: () => buildMakePaymentBottomSheet(
                     context,
-                    ontap: () {
-                      Get.back();
-                      ctr.makeTransfer();
-                    },
                   ),
                   label: 'Confirm & Send',
                 ),

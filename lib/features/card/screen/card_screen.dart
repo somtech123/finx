@@ -15,13 +15,14 @@ class CardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor:
             Get.isDarkMode ? AppColor.blackColor : AppColor.whiteColor,
         centerTitle: true,
         title: Text(
           'Card',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
         ),
@@ -36,7 +37,7 @@ class CardScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,9 +49,9 @@ class CardScreen extends StatelessWidget {
                     ),
               ),
               SizedBox(height: 20.h),
-              FinxCard(),
+              const FinxCard(),
               SizedBox(height: 20.h),
-              MasterCard(),
+              const MasterCard(),
               Text(
                 'Bank card',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(

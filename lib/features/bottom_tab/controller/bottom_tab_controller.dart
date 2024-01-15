@@ -29,6 +29,7 @@ class BottomTabController extends GetxController {
     globalCtr.getUserInfo();
     globalCtr.getAccountInfo();
     globalCtr.fetchBalance();
+    globalCtr.getWallet();
     super.onReady();
   }
 }

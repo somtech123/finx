@@ -23,7 +23,7 @@ class TranscationHistoryScreen extends StatelessWidget {
               Get.isDarkMode ? AppColor.blackColor : AppColor.whiteColor,
           centerTitle: true,
           title: Text(
-            'History',
+            'Transaction History',
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,

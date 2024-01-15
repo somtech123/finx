@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finx/core/helper/firebase_helper.dart';
 import 'package:finx/core/model/user_model.dart';
+import 'package:finx/core/services/user_services/model/wallet_model.dart';
 import 'package:finx/core/services/user_services/user_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,5 +66,22 @@ class UserServices implements UserRepository {
       res = e.toString();
     }
     return res;
+  }
+
+  @override
+  Future<WalletModel> getWalletData() async {
+    User currentUser = _auth.currentUser!;
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snap = await _firestore
+          .collection("users")
+          .doc(currentUser.uid)
+          .collection('securityPin')
+          .doc(currentUser.uid)
+          .get();
+      return WalletModel.fromJson(snap.data()!);
+    } catch (e) {
+      debugPrint(e.toString());
+      return WalletModel();
+    }
   }
 }

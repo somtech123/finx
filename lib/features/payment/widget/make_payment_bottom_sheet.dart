@@ -1,3 +1,4 @@
+import 'package:finx/features/payment/controller/send_mooney_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,8 +7,11 @@ import 'package:get/get.dart';
 import '../../../core/constant/app_color.dart';
 import '../../../core/shared_widgets/screen_keyboard.dart';
 
-buildMakePaymentBottomSheet(BuildContext context,
-    {required VoidCallback ontap}) {
+var ctr = Get.find<SendMoneyController>();
+
+buildMakePaymentBottomSheet(
+  BuildContext context,
+) {
   return Get.bottomSheet(
       Material(
         borderRadius: BorderRadius.only(
@@ -38,8 +42,16 @@ buildMakePaymentBottomSheet(BuildContext context,
                     ),
                   ),
                 ),
-                SizedBox(height: 10.h),
-                ScreenKeyboard(onchange: ontap)
+                Obx(
+                  () => Text(
+                    ctr.pinErrorText.value,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.red),
+                  ),
+                ),
+                const ScreenKeyboard()
               ],
             ),
           ),

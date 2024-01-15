@@ -1,5 +1,6 @@
 import 'package:finx/core/constant/app_color.dart';
 import 'package:finx/core/shared_widgets/primary_button.dart';
+import 'package:finx/core/utlis/amount_fomatter.dart';
 import 'package:finx/features/dashboard/controller/fund_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,15 +38,16 @@ class FundWalletScreen extends StatelessWidget {
               ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25.h),
+        padding: EdgeInsets.symmetric(horizontal: 25.h, vertical: 20.h),
         child: PrimaryButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
               ctr.fundAcct();
             }
           },
-          label: 'Share',
+          label: 'Confirm',
         ),
       ),
       body: Padding(
@@ -113,16 +115,12 @@ class FundWalletScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 20.h),
-                    InkWell(
-                      onTap: () => debugPrint(
-                          ctr.globalCtr.accountInfo.value.accountNumber),
-                      child: Text(
-                        'Account name',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
+                    Text(
+                      'Account name',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     AbsorbPointer(
                       absorbing: true,
@@ -155,7 +153,8 @@ class FundWalletScreen extends StatelessWidget {
                       controller: ctr.amountCtr,
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        AmountInputFormatter()
                       ],
                       validator: (val) {
                         if (val == null || val.isEmpty) {

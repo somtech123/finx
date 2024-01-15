@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:finx/core/global_controller.dart';
+import 'package:finx/core/helper/encryption_helper.dart';
 import 'package:finx/core/services/account/account_repo_implementation.dart';
 import 'package:finx/core/services/account/model/resolved_acct_model.dart';
 import 'package:finx/core/services/account/usecase.dart';
@@ -30,6 +31,8 @@ class SendMoneyController extends GetxController {
   RxBool resolvingAcct = false.obs;
 
   RxBool isTyping = true.obs;
+
+  RxString pinErrorText = ''.obs;
 
   RxString status = ''.obs;
 
@@ -105,7 +108,7 @@ class SendMoneyController extends GetxController {
         }
       };
 
-  makeTransfer() async {
+  _makeTransfer() async {
     showLoading(Get.context!);
 
     var res = await _accountServices.makeTransfer(payload());
@@ -129,6 +132,19 @@ class SendMoneyController extends GetxController {
     var timestampPart =
         DateTime.now().millisecondsSinceEpoch.toString().substring(0, 8);
     return 'KPY-PAY-$randomPart-$timestampPart';
+  }
+
+  validateWallet(String enteredPin) async {
+    pinErrorText.value = '';
+    String cipher = globalCtr.walletData.value.wallet!;
+
+    String pin = await EncryptionHelper.decryptKey(cipher);
+
+    if (enteredPin != pin) {
+      pinErrorText.value = 'Invalid pin';
+    } else {
+      await _makeTransfer();
+    }
   }
 
   @override

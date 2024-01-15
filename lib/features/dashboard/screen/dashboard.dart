@@ -166,7 +166,7 @@ class DashBoardScreen extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: InkWell(
-        onTap: () => Get.to(() => ViewProfileScren()),
+        onTap: () => Get.to(() => const ViewProfileScren()),
         child: CircleAvatar(
           maxRadius: 20.r,
           backgroundImage: CachedNetworkImageProvider(userImage),

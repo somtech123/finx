@@ -257,10 +257,6 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                         controller: ctr.descriptionController,
                       ),
                       SizedBox(height: 50.h),
-                      // Visibility(
-                      //   visible:
-                      //       ctr.resolveAcct.accountName!.isNotEmpty,
-                      //   child:
                       PrimaryButton(
                         onPressed: () {
                           if (formKey.currentState!.validate() &&
@@ -270,7 +266,6 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                         },
                         label: 'Next',
                       ),
-                      // ),
                     ],
                   ),
                 ),

@@ -1,6 +1,5 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter/cupertino.dart';
 
 class EncryptionHelper {
   //Decrypt the base 16 string to a string

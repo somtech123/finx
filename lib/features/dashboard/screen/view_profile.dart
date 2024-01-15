@@ -71,7 +71,7 @@ class _ViewProfileScrenState extends State<ViewProfileScren> {
                 Card(
                   color: Get.isDarkMode
                       ? AppColor.primaryColor
-                      : AppColor.greyColor,
+                      : AppColor.tranColor,
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.h, right: 10.h),
                     child: Column(
@@ -145,9 +145,12 @@ class _ViewProfileScrenState extends State<ViewProfileScren> {
                             heading: 'Full Name',
                             trailing:
                                 '${ctr.globalCtr.loginUser.value.firstName} ${ctr.globalCtr.loginUser.value.lastName}'),
-                        _buildProfileListile(context,
-                            heading: 'Mobile Number',
-                            trailing: '${ctr.globalCtr.loginUser.value.phone}'),
+                        ctr.globalCtr.loginUser.value.phone == null
+                            ? const SizedBox.shrink()
+                            : _buildProfileListile(context,
+                                heading: 'Mobile Number',
+                                trailing:
+                                    '${ctr.globalCtr.loginUser.value.phone}'),
                         _buildProfileListile(context,
                             heading: 'Nick Name',
                             trailing:
@@ -166,7 +169,7 @@ class _ViewProfileScrenState extends State<ViewProfileScren> {
                 Card(
                   color: Get.isDarkMode
                       ? AppColor.primaryColor
-                      : AppColor.greyColor,
+                      : AppColor.tranColor,
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.h, right: 10.h),
                     child: Column(
@@ -270,7 +273,7 @@ Widget _buildacctStatusListile(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: trailing.toLowerCase() == AccountStatus.active
-                ? AppColor.whiteColor
+                ? Colors.blue
                 : Colors.red,
           ),
     ),
