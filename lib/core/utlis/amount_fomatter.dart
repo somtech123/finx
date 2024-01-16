@@ -7,7 +7,7 @@ class AmountInputFormatter extends TextInputFormatter {
       TextEditingValue oldValue, TextEditingValue newValue) {
     String text = newValue.text.replaceAll(RegExp('[^0-9]'), '');
 
-    final formatter = new NumberFormat("#,###");
+    final formatter = NumberFormat("#,###");
     text = formatter.format(int.parse(text));
 
     return TextEditingValue(

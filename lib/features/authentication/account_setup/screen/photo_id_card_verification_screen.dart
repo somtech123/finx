@@ -40,7 +40,7 @@ class PhotoIdCardVerificationScreen extends StatelessWidget {
             ),
             PrimaryButton(
               onPressed: () {
-                Get.to(() => SuccessScreen());
+                Get.to(() => const SuccessScreen());
               },
               label: 'Continue',
             ),

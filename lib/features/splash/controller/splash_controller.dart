@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 class SplashController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   moveToNext() async {
-    Future.delayed(const Duration(seconds: 3), () {});
+    Future.delayed(const Duration(seconds: 3), () {
+      checkIfUserIsLoggedIn();
+    });
   }
 
   checkIfUserIsLoggedIn() async {
@@ -26,7 +28,7 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
-    checkIfUserIsLoggedIn();
+    moveToNext();
     super.onReady();
   }
 }

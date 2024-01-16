@@ -81,7 +81,7 @@ class BvnVerificationScreen extends StatelessWidget {
                   SizedBox(height: 200.h),
                   PrimaryButton(
                     onPressed: () {
-                      Get.to(() => BvnSucessScreen());
+                      Get.to(() => const BvnSucessScreen());
                     },
                     label: 'Continue',
                   ),

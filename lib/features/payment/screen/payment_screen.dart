@@ -60,7 +60,7 @@ class PaymentScreen extends StatelessWidget {
                 text: 'To FinX',
                 leading: SvgPicture.asset('assets/svgs/circular_finx_logo.svg'),
                 ontap: () {
-                  Get.to(() => TransferFinXScreen());
+                  Get.to(() => const TransferFinXScreen());
                 },
               ),
               SizedBox(height: 20.h),
@@ -69,7 +69,7 @@ class PaymentScreen extends StatelessWidget {
                 text: 'Other Bank',
                 leading: SvgPicture.asset('assets/svgs/bank_icon.svg'),
                 ontap: () {
-                  Get.to(() => SendMoneyScreen());
+                  Get.to(() => const SendMoneyScreen());
                 },
               ),
               SizedBox(height: 30.h),

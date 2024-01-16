@@ -46,7 +46,7 @@ class LoginController extends GetxController {
         email: emailController.text, password: passwordController.text);
     Get.back();
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else {
       showErrorAlertWidget(Get.context!, message: res);
     }
@@ -59,7 +59,7 @@ class LoginController extends GetxController {
     Get.back();
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {
@@ -74,7 +74,7 @@ class LoginController extends GetxController {
     Get.back();
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {

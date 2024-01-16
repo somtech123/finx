@@ -154,6 +154,7 @@ Widget buildlayout(BuildContext context,
     contentPadding: EdgeInsets.zero,
     onTap: ontap,
     trailing: SvgPicture.asset('assets/svgs/icons8_back_1 1.svg',
+        // ignore: deprecated_member_use
         color: AppColor.primaryColor),
     title: Text(
       text,

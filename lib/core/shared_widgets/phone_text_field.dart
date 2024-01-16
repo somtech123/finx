@@ -22,7 +22,7 @@ class PhoneTextField extends StatelessWidget {
   final String? errorMessage;
   final TextEditingController? controller;
 
-  PhoneTextField({
+  const PhoneTextField({
     super.key,
     this.borderColor = Colors.transparent,
     this.isTransparentBorder = false,
@@ -44,7 +44,7 @@ class PhoneTextField extends StatelessWidget {
       decoration: InputDecoration(
         //  labelText: 'Phone Number',
         hintText: 'Phone Number',
-        hintStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+        hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: 13,
             fontWeight: FontWeight.w500,
             color: Get.isDarkMode ? AppColor.whiteColor : AppColor.greyColor),
@@ -52,7 +52,7 @@ class PhoneTextField extends StatelessWidget {
             ? AppColor.secondaryDarkColor
             : AppColor.secondaryLight,
         filled: true,
-        labelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+        labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: 13,
             fontWeight: FontWeight.w500,
             color: Get.isDarkMode ? AppColor.whiteColor : AppColor.greyColor),
@@ -83,9 +83,10 @@ class PhoneTextField extends StatelessWidget {
                 color: isTransparentBorder ? Colors.transparent : Colors.red,
                 width: 1)),
       ),
-      style: Theme.of(context).textTheme.headline5!.copyWith(fontSize: sh(13)),
+      style:
+          Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: sh(13)),
       dropdownTextStyle:
-          Theme.of(context).textTheme.headline5!.copyWith(fontSize: sh(13)),
+          Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: sh(13)),
       controller: controller,
       focusNode: focusNode,
       initialCountryCode: 'NG',

@@ -27,7 +27,6 @@ class _ViewProfileScrenState extends State<ViewProfileScren> {
       selectedImage = file;
     });
     await ctr.globalCtr.updateProfilePhoto(selectedImage!);
-    debugPrint('==============done======================');
   }
 
   @override

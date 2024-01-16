@@ -27,10 +27,10 @@ class _BottomTabState extends State<BottomTab> {
   List<Widget> _buildScreens() {
     return [
       DashBoardScreen(),
-      PaymentScreen(),
-      CardScreen(),
+      const PaymentScreen(),
+      const CardScreen(),
       TranscationHistoryScreen(),
-      Profile()
+      const Profile()
     ];
   }
 
@@ -38,29 +38,21 @@ class _BottomTabState extends State<BottomTab> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: ctr.onWillPop,
-      child:
-          // Obx(
-
-          //   () =>
-          PersistentTabView(
+      child: PersistentTabView(
         context,
         controller: ctr.tabController,
         padding: const NavBarPadding.symmetric(vertical: 10),
         onItemSelected: (value) {
-          debugPrint(value.toString());
           ctr.tabIndex.value = value;
         },
         screens: _buildScreens(),
         items: _navBarsItems(),
-
         confineInSafeArea: false,
         backgroundColor: Get.isDarkMode ? AppColor.blackColor : Colors.white,
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset:
-            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-        hideNavigationBarWhenKeyboardShows:
-            true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: true,
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.circular(10.r),
           colorBehindNavBar:
@@ -79,7 +71,6 @@ class _BottomTabState extends State<BottomTab> {
         ),
         navBarStyle: NavBarStyle.style1,
       ),
-      // ),
     );
   }
 
@@ -88,6 +79,7 @@ class _BottomTabState extends State<BottomTab> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           'assets/svgs/menu_icons.svg',
+          // ignore: deprecated_member_use
           color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
         ),
         title: ('Home'),
@@ -97,6 +89,7 @@ class _BottomTabState extends State<BottomTab> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           'assets/svgs/icons8_Banknotes.svg',
+          // ignore: deprecated_member_use
           color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
         ),
         title: ('Payment'),
@@ -106,6 +99,7 @@ class _BottomTabState extends State<BottomTab> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           'assets/svgs/icons8_card_wallet.svg',
+          // ignore: deprecated_member_use
           color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
         ),
         title: ('Card'),
@@ -115,6 +109,7 @@ class _BottomTabState extends State<BottomTab> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           'assets/svgs/icons8_time_machine.svg',
+          // ignore: deprecated_member_use
           color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
         ),
         title: ('History'),
@@ -124,6 +119,7 @@ class _BottomTabState extends State<BottomTab> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           'assets/svgs/icons8_account.svg',
+          // ignore: deprecated_member_use
           color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
         ),
         title: ('Profile'),

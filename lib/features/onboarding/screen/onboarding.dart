@@ -75,7 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ? PrimaryButton(
                       label: 'Get Started',
                       onPressed: () {
-                        Get.offAll(() => AuthScreen());
+                        Get.offAll(() => const AuthScreen());
                       })
                   : PrimaryButton(
                       onPressed: () {

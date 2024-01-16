@@ -13,7 +13,7 @@ import '../widget/build_profile_tile.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
-  Profile({super.key});
+  const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();

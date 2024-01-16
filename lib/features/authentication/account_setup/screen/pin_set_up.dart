@@ -169,7 +169,7 @@ class _PinSetUpScreenState extends State<PinSetUpScreen> {
                             },
                             label: 'Continue',
                           )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                   )
                 ],
               ),

@@ -15,7 +15,7 @@ class AuthController extends GetxController {
     Get.back();
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {
@@ -30,7 +30,7 @@ class AuthController extends GetxController {
     Get.back();
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {

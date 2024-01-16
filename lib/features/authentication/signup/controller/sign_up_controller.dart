@@ -43,7 +43,7 @@ class SignUpController extends GetxController {
   }
 
   _register() async {
-    Get.to(() => ProfileVerification(), arguments: {
+    Get.to(() => const ProfileVerification(), arguments: {
       'email': emailController.text,
       'password': passwordController.text
     });
@@ -56,7 +56,7 @@ class SignUpController extends GetxController {
     Get.back();
 
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {
@@ -70,7 +70,7 @@ class SignUpController extends GetxController {
     String res = await _authservices.facebookSigin();
     Get.back();
     if (res == 'success') {
-      Get.offAll(() => BottomTab());
+      Get.offAll(() => const BottomTab());
     } else if (res == 'inactive') {
       Get.to(() => const PinSetUpScreen());
     } else {

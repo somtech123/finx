@@ -96,7 +96,7 @@ class DashBoardScreen extends StatelessWidget {
                     headerButton(context,
                         icon: SvgPicture.asset('assets/svgs/transfer.svg'),
                         ontap: () {
-                      Get.to(() => SendMoneyScreen());
+                      Get.to(() => const SendMoneyScreen());
                     }, text: 'Transfer'),
                     headerButton(context,
                         icon: SvgPicture.asset('assets/svgs/pay_bill_icon.svg'),
@@ -184,6 +184,7 @@ class DashBoardScreen extends StatelessWidget {
         children: [
           SvgPicture.asset(
             'assets/svgs/headphone.svg',
+            // ignore: deprecated_member_use
             color: Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
           ),
           SizedBox(width: 16.w),
@@ -191,6 +192,7 @@ class DashBoardScreen extends StatelessWidget {
             onTap: () => Get.to(() => const NotificationScreen()),
             child: SvgPicture.asset(
               'assets/svgs/icons8_notification.svg',
+              // ignore: deprecated_member_use
               color:
                   Get.isDarkMode ? AppColor.whiteColor : AppColor.primaryColor,
             ),

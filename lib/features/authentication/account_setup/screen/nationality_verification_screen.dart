@@ -110,7 +110,7 @@ class NationalityVerificationScreen extends StatelessWidget {
                 SizedBox(height: 30.h),
                 PrimaryButton(
                   onPressed: () {
-                    Get.to(() => PhotoIdCardVerificationScreen());
+                    Get.to(() => const PhotoIdCardVerificationScreen());
                   },
                   label: 'Continue',
                 ),

@@ -40,7 +40,7 @@ class SelfieVerificationScreen extends StatelessWidget {
             ),
             PrimaryButton(
               onPressed: () {
-                Get.to(() => ProfileVerification());
+                Get.to(() => const ProfileVerification());
               },
               label: 'Continue',
             ),

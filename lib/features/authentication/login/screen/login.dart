@@ -76,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topRight,
                   child: InkWell(
-                    onTap: () => Get.to(() => ResetPassWord()),
+                    onTap: () => Get.to(() => const ResetPassWord()),
                     child: Text(
                       'Fogotten password ?',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
