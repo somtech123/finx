@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:finx/core/constant/string_constant.dart';
 import 'package:finx/core/utlis/amount_fomatter.dart';
 import 'package:finx/features/payment/controller/send_mooney_controller.dart';
@@ -63,96 +61,22 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Platform.isIOS
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Bank',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                                SizedBox(height: 20.h),
-                                InkWell(
-                                  onTap: () => showCupertinoModalPopup(
-                                    context: context,
-                                    builder: (_) => SizedBox(
-                                      width: Get.width,
-                                      height: 216.h,
-                                      child: CupertinoPicker(
-                                        backgroundColor: Colors.white,
-                                        magnification: 1.22,
-                                        squeeze: 1.2,
-                                        useMagnifier: true,
-                                        itemExtent: 32.h,
-                                        scrollController:
-                                            FixedExtentScrollController(
-                                                initialItem: 1),
-                                        onSelectedItemChanged: (index) {
-                                          setState(() {
-                                            // ctr.selectedBank.value
-                                            //  'jj'  = index;
-                                          });
-                                        },
-                                        children: List.generate(
-                                          ctr.bankList.length,
-                                          (index) => Center(
-                                            child: Text(
-                                              ctr.bankList[index].name!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium!
-                                                  .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color:
-                                                          AppColor.blackColor),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  child: AbsorbPointer(
-                                    absorbing: true,
-                                    child: AppTextField(
-                                      hintText: ctr.selectedBank.value.name,
-                                      hintStyle: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall!
-                                          .copyWith(
-                                            fontSize: 14,
-                                            color: Get.isDarkMode
-                                                ? AppColor.whiteColor
-                                                : AppColor.blackColor,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : CustomDropDownForm(
-                              onChanged: (value) {
-                                setState(() {
-                                  ctr.selectedBank.value = value;
-                                });
-                              },
-                              header: 'Bank',
-                              listOfValue: ctr.bankList,
-                              selectedValue: ctr.selectedBank.value,
-                              validator: (val) {
-                                if (val == null || val.name!.isEmpty) {
-                                  return 'This Field is required';
-                                }
-                                return null;
-                              },
-                            ),
+                      CustomDropDownForm(
+                        onChanged: (value) {
+                          setState(() {
+                            ctr.selectedBank.value = value;
+                          });
+                        },
+                        header: 'Bank',
+                        listOfValue: ctr.bankList,
+                        selectedValue: ctr.selectedBank.value,
+                        validator: (val) {
+                          if (val == null || val.name!.isEmpty) {
+                            return 'This Field is required';
+                          }
+                          return null;
+                        },
+                      ),
                       SizedBox(height: 20.h),
                       Text(
                         'Account Number',

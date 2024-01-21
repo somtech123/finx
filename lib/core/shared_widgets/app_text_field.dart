@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:finx/core/constant/app_color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -60,7 +57,8 @@ class AppTextField extends StatelessWidget {
   final VoidCallback? onEdittingComplete;
   final void Function(String)? onFieldSubmitted;
 
-  AppTextField({
+  const AppTextField({
+    super.key,
     this.hintText,
     this.suffixIcon,
     this.prefixIcon,
@@ -111,7 +109,7 @@ class AppTextField extends StatelessWidget {
       keyboardType: keyboardType,
       maxLength: maxLength,
       style: textStyle ??
-          Theme.of(context).textTheme.headline5!.copyWith(fontSize: sh(13)),
+          Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: sh(13)),
       decoration: inputDecoration ??
           InputDecoration(
             helperText: helperText,
@@ -122,7 +120,7 @@ class AppTextField extends StatelessWidget {
             errorStyle: TextStyle(fontSize: sh(12)),
             contentPadding: EdgeInsets.fromLTRB(sw(12), sh(20), sw(12), sh(20)),
             hintStyle: hintStyle ??
-                Theme.of(context).textTheme.bodyText1!.copyWith(
+                Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                     color: Get.isDarkMode

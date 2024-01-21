@@ -42,7 +42,7 @@ class TransferFinXScreen extends StatelessWidget {
                     ),
               ),
               SizedBox(height: 20.h),
-              AppTextField(
+              const AppTextField(
                 hintText: 'Account number',
               ),
               SizedBox(height: 20.h),
@@ -54,7 +54,7 @@ class TransferFinXScreen extends StatelessWidget {
                     ),
               ),
               SizedBox(height: 20.h),
-              AppTextField(
+              const AppTextField(
                 hintText: 'Enter Amount',
               ),
               SizedBox(height: 20.h),
@@ -66,7 +66,7 @@ class TransferFinXScreen extends StatelessWidget {
                     ),
               ),
               SizedBox(height: 20.h),
-              AppTextField(
+              const AppTextField(
                 hintText: 'Add a Description',
               ),
               SizedBox(height: 120.h),

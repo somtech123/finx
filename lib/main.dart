@@ -7,3 +7,8 @@ void main() async {
   await Firebase.initializeApp();
   runApp(Finx());
 }
+
+
+//TODO
+
+//integrating bill payment and Qr code scan

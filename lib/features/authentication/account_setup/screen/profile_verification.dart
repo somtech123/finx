@@ -3,7 +3,6 @@ import 'package:finx/core/constant/string_constant.dart';
 import 'package:finx/core/shared_widgets/app_text_field.dart';
 import 'package:finx/core/shared_widgets/primary_button.dart';
 import 'package:finx/features/authentication/account_setup/controller/profile_set_up_controller.dart';
-import 'package:finx/features/authentication/account_setup/screen/pin_set_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
